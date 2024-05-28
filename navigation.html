@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Tag and Dropdown with Tailwind CSS</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-purple-500 to-pink-500 min-h-screen flex flex-col">
+
+    <div class="container mx-auto mt-10">
+        <nav class="flex justify-center">
+            <a href="class_main.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Home</a>
+            <a href="qa.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Q&A Forum</a>
+            <a href="navigation.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Campus Map</a>
+            <a href="chat.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Chatbot</a>
+        </nav>
+    </div>
+    <!-- Container for centered content -->
+    <div class="flex flex-col items-center justify-center mx-auto max-w-screen-md p-4">
+        <!-- Image Tag -->
+        <div class="my-5 ">
+            <img id="locationImage" src="Front View.jpg" alt="Location Image" class="rounded-lg shadow-md w-100 h-100 mx-auto mb-3">
+            <!-- <h2 class="text-black text-center" style="font-size: large;"><b>Main Gate ↑ [Start]</b></h2> -->
+        </div>
+        <div class="text-center">
+            <h3 id="description" class="border border-black p-2">College Map</h3>
+            <!-- <h4 class="text-xl font-bold">College Graph</h4> -->
+            <hr class="my-4">
+            <ul class="text-left">
+                <li>Block1 : Administrative Block</li>
+                <li>Block2 : EEE (4th Floor)/AI (2nd Floor)</li>
+                <li>Block3 : CS (4th Floor)/Polytechnic (3rd Floor)/Math Department (2nd Floor)</li>
+                <li>Block4 : MBA (4th Floor)/MCA (3rd Floor)/Civil Department (1st Floor-left)/Xerox (1st Floor-Right)</li>
+                <li>Block5 : Canteen/Ground</li>
+                <li style="color: brown;"><b>Stairs</b></li>
+                <br>
+            </ul>
+        </div>
+        <hr class="my-4 w-full">
+        <!-- Dropdown with Multiple Links -->
+        <div class="my-5 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <button type="button" onclick="changeImage('Front View.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                    FRONT VIEW
+                  </button> 
+    
+                
+                <button type="button" onclick="changeImage('Back View.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                          BACK VIEW
+                        </button>
+    
+                        <button type="button" onclick="changeImage('Side View.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            SIDE VIEW
+                        </button>
+    
+                        <button type="button" onclick="changeImage('Ground Floor.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            GROUND FLOOR
+                        </button>
+    
+                        <button type="button" onclick="changeImage('First Floor.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            FIRST FLOOR
+                        </button>
+    
+                        <button type="button" onclick="changeImage('Second Floor.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            SECOND FLOOR
+                        </button>
+    
+                        <button type="button" onclick="changeImage('Third Floor.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            THIRD FLOOR
+                        </button>
+    
+                        <button type="button" onclick="changeImage('Fourth Floor.jpg')" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
+                            FOURTH FLOOR
+                        </button>
+                       
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to set default image once the page loads
+        window.onload = function () {
+            // Set the default image here
+            var defaultImageSrc = 'Main image.jpg';
+            var description = "College Graph";
+            changeImage(defaultImageSrc);
+        };
+
+        function changeImage(imageSrc) {
+            document.getElementById('locationImage').src = imageSrc;
+        }
+
+        function changeText(TextSrc) {
+            // Split the text by newline character (\n)
+            var lines = TextSrc.split("\n");
+            // Join the lines with HTML line breaks
+            var formattedText = lines.join("<br>");
+            // Set the formatted text as the content of the h3 element
+            document.getElementById('description').innerHTML = formattedText;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional CSS for chatbot styling */
+        /* Chat container */
+        .chat-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh; /* Adjust the height as needed */
+            background-color: #fff;
+            margin-top: 10%;
+        }
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            align-self: flex-end;
+            /* margin-left: 38%; */
+        }
+        .bot-message {
+            background-color: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+
+        }
+        .chat-input {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+        #userInput {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-purple-500 to-pink-500 min-h-screen flex flex-col">
+
+    <div class="container mx-auto mt-10">
+        <nav class="flex justify-center">
+            <a href="class_main.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Home</a>
+            <a href="qa.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Q&A Forum</a>
+            <a href="navigation.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Campus Map</a>
+            <a href="chat.html" class="text-black-500 font-bold text-lg mx-4 hover:text-blue-700">Chatbot</a>
+        </nav>
+    </div>
+    <div class="chat-container mx-auto my-3">
+        <div class="chat-header bg-blue-500 text-white py-2" style="text-align: center;">
+            Chatbot
+        </div>
+        <div class="chat-box flex-1 overflow-y-auto p-2">
+            <div class="chat-message bot-message bg-gray-200 text-gray-700 rounded-lg mb-2 p-2">
+                Hi! How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input flex items-center border-t border-gray-300">
+            <input type="text" id="userInput" placeholder="Type your message..." class="flex-1 p-2 border border-gray-300 rounded-md outline-none" >
+            <button onclick="sendMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-md ml-2">Send</button>
+            <!-- <button onclick="readLastMessageAloud()" class="px-4 py-2 bg-green-500 text-white rounded-md ml-2">Read Last Message</button> -->
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('userInput').value;
+            if (userInput.trim() === '') return;
+
+            appendMessage(userInput, 'user-message');
+
+            // Simulate a response from the bot (replace with actual chatbot logic)
+            var botResponse = getBotResponse(userInput);
+            appendMessage(botResponse, 'bot-message');
+
+            // Clear the input field
+            document.getElementById('userInput').value = '';
+
+            // Read the bot response aloud
+            readMessageAloud(botResponse);
+        }
+
+        function appendMessage(message, className) {
+            var chatBox = document.querySelector('.chat-box');
+            var messageDiv = document.createElement('div');
+            messageDiv.innerHTML = message;
+            messageDiv.classList.add('chat-message', className);
+            chatBox.appendChild(messageDiv);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getBotResponse(userInput) {
+            // Questions related to college programs, admissions, and campus life
+            if (userInput.toLowerCase().includes('programs') || userInput.toLowerCase().includes('degrees') || userInput.toLowerCase().includes('engineering')) {
+                return `The college offers a range of programs including 
+                    <ul class="dropdown">
+                        <li id="menu-item-1701" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1701"><a href="https://robotics.aitmbgm.ac.in">Robotics & Automation Engineering</a></li>
+                        <li id="menu-item-75" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-75"><a href="https://ai.aitmbgm.ac.in">Artificial Intelligence & Data Science</a></li>
+                        <li id="menu-item-76" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76"><a href="https://civil.aitmbgm.ac.in">Civil Engineering</a></li>
+                        <li id="menu-item-77" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-77"><a href="https://cse.aitmbgm.ac.in">Computer Science & Engineering</a></li>
+                        <li id="menu-item-78" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78"><a href="https://ece.aitmbgm.ac.in">Electronics & Communication Engineering</a></li>
+                        <li id="menu-item-79" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-79"><a href="https://eee.aitmbgm.ac.in">Electrical & Electronics Engineering</a></li>
+                        <li id="menu-item-80" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-80"><a href="https://mech.aitmbgm.ac.in">Mechanical Engineering</a></li>
+                    </ul> 
+                    For more details, you can visit the <a href="https://aitmbgm.ac.in/" style="color:blue;">college website</a>`;
+            }  else if (userInput.toLowerCase().includes('apply') || userInput.toLowerCase().includes('admission')) {
+                return `To apply to the college 
+                                <ol>
+                                    <li><strong>Explore Programs:</strong> Research and select a program aligned with your interests and career goals from AITM Belgaum's offerings.</li>
+                                    <li><strong>Check Eligibility:</strong> Ensure you meet the program's eligibility criteria, including educational qualifications and other requirements.</li>
+                                    <li><strong>Complete Application:</strong> Fill out the application form accurately, either online or offline, providing personal and academic details as needed.</li>
+                                    <li><strong>Submit Documents:</strong> Gather and submit necessary documents, such as academic transcripts and identification, along with your application.</li>
+                                    <li><strong>Pay Application Fee:</strong> If required, pay the application fee following the institute's instructions, which may vary based on the program and applicant category.</li>
+                                    <li><strong>Entrance Exam/Interview:</strong> Some programs may necessitate an entrance exam or interview for selection purposes.</li>
+                                    <li><strong>Await Admission Decision:</strong> Allow the admission committee time to review your application; expect communication regarding your application status.</li>
+                                    <li><strong>Receive Admission Offer:</strong> Upon acceptance, carefully review the admission offer, ensuring you understand all instructions provided.</li>
+                                    <li><strong>Accept Offer and Enroll:</strong> Follow the outlined procedure to accept the admission offer and complete enrollment within the specified timeframe.</li>
+                                    <li><strong>Participate in Orientation:</strong> Attend the orientation program to familiarize yourself with campus facilities, academic procedures, and other essential information.</li>
+                                </ol>
+                . Application deadlines and requirements may vary, so it's best to check the college website for specific details.`;
+            } else if (userInput.toLowerCase().includes('admission requirements') || userInput.toLowerCase().includes('deadlines')) {
+                return `The eligibility criteria for admission to M.B.A/M.TECH./M.C.A programs at Angadi Institute of Technology and Management (AITM) require candidates to have obtained 50% of aggregate minimum marks taken together in all the subjects for all the years of the Degree examination. For candidates belonging to SC, ST, and Category-I, the requirement is 45% of aggregate marks in all the subjects for all the years in the Degree examination. Additionally, only candidates of Karnataka origin are eligible to claim reservation.
+                        For admission into a diploma course, the minimum qualification required is the passing of the Secondary School Leaving Certificate (SSLC)/tenth standard/equivalent examination, with at least 35 percent in science and maths subjects.
+                        As for the deadlines, the provided contexts do not specify the admission deadlines for AITM. Therefore, for the most accurate and up-to-date information regarding admission deadlines, you would need to refer to the official AITM admissions page or contact the admissions office directly. Admission requirements and deadlines depend on the program you're applying to. You can find detailed information on the college website or by contacting the admissions office directly.`;
+            } else if (userInput.toLowerCase().includes('campus tour') || userInput.toLowerCase().includes('visit')) {
+                return `Yes, you can schedule a campus tour or visit by contacting the admissions office. They'll provide you with available dates and times.`;
+            } else if (userInput.toLowerCase().includes('tuition') || userInput.toLowerCase().includes('fees')) {
+                return `The cost of tuition and fees varies depending on the program and whether you're an in-state or out-of-state student. For specific details, you can check the college website or contact the financial aid office.`;
+            } else if (userInput.toLowerCase().includes('scholarships') || userInput.toLowerCase().includes('financial aid')) {
+                return `The college offers various scholarships and financial aid options to eligible students. You can find more information on the college website or by contacting the financial aid office.`;
+            } else if (userInput.toLowerCase().includes('resources') || userInput.toLowerCase().includes('student organizations')) {
+                return `The college provides a range of resources to students, including libraries, career services, and student organizations. You can explore these options once you enroll.`;
+            } else if (userInput.toLowerCase().includes('aitm') || userInput.toLowerCase().includes('suresh angadi education foundation') || userInput.toLowerCase().includes('saef')) {
+                return `Angadi Institute of Technology and Management (AITM) <img src="https://abped-college-dashboard.s3.us-east-2.amazonaws.com/tted/college-backend/college/39947141-fd74-41a9-815d-b0cdc20dc22b.jpg" alt="college" style="width:100%"> was established in 2009,Under the wing of the Suresh Angadi Education Foundation (SAEF). Suresh Angadi was its Founder Chairman. <a href="https://www.google.com/maps/dir//aitm/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3bbf653f86391c41:0x6f90eeb682e03767?sa=X&ved=1t:3061&ictx=111">Location</a> - <span aria-label="Call phone number 070220 49135">070220 49135</span>`;
+            } else if (userInput.toLowerCase().includes('principal') || userInput.toLowerCase().includes('hod')) {
+                return `<p>At Angadi Institute of Technology and Management (AITM) Belgaum, the key personnel and heads of departments are as follows:</p>
+                        <h2>Principal</h2>
+                        <p>Dr. Anand Deshpande</p>
+                        <h2>Heads of Departments</h2>
+                        <ul>
+                            <li><strong>Computer Science (CSE):</strong> Dr. Dhanashree Kulkarni</li>
+                            <li><strong>Electronics and Communication (ECE):</strong> Prof.Raviraj Chougala</li>
+                            <li><strong>Civil Engineering:</strong> Dr. G.S.Manjunatha</li>
+                            <li><strong>Mechanical Engineering:</strong> Prof.Malagouda Patil</li>
+                            <li><strong>Electrical and Electronics Engineering (EEE):</strong> Prof.Kantesh D C</li>
+                            <li><strong>Artificial Intelligence & Data Science:</strong> Prof.Sagar Birje</li>
+                            <li><strong>Robotics & Automation Engineering:</strong> Prof.Pooja V. Angolkar</li>
+                            <li><strong>MBA Department:</strong> Dr. Suryakumar N.Khanai</li>
+                            <li><strong>Basic Science(Physics):</strong> Dr. Vijay K Kulkarni</li>
+                            <li><strong>Basic Science(Chemistry):</strong> Dr. Vinayak Adimule</li>
+                            <li><strong>Basic Science(Mathematics):</strong> Dr. Kiran Potadar</li>
+                        </ul>
+                        <p>These details are compiled from the latest information available on <a href="https://www.aitmbelgaum.edu.in">AITM Belgaum's official website</a>.</p>`;
+                    } 
+            else if (userInput.toLowerCase().includes('hi') || userInput.toLowerCase().includes('hello') || userInput.toLowerCase().includes('hey') || userInput.toLowerCase().includes('whatsup') || userInput.toLowerCase().includes('yo')) {
+                return '<p>Hello Welcome to AITM Chat Service</p>';
+            }
+            else if (userInput.toLowerCase().includes('placement') || userInput.toLowerCase().includes('job')) {
+                return `AITM Belgaum has a dedicated placement cell that works towards providing placement opportunities to students. The placement cell conducts various activities such as workshops, seminars, and mock interviews to prepare students for placements. Many reputed companies visit the campus for recruitment drives, offering job opportunities to students across different disciplines.`;
+            }
+            else if (userInput.toLowerCase().includes('naac')) {
+                return `A Grade`;
+            }
+            else if (userInput.toLowerCase().includes('seats')) {
+                return ` <ul>Seats in AITM 
+                    <li>CSE : 120 seats</li>
+                    <li>AI : 60 seats</li>
+                    <li>EEE : 30 seats</li>
+                    <li>ECE : 60 seats</li>
+                    <li>Mech : 60 seats</li>`;
+            }
+            else if (userInput.toLowerCase().includes('campus tour')) {
+                return `For scheduling a campus tour or visit, please refer to the official AITM admissions page or contact the admissions office directly.`;
+            }
+            else if (userInput.toLowerCase().includes('resources') || userInput.toLowerCase().includes('libraries')) {
+                return `The campus resources available to students at Angadi Institute of Technology and Management (AITM) include:
+                    Libraries: AITM has a library known as the Knowledge Center (KC). It offers a collection of over 32,000 books, including reference books and those relevant to the VTU curriculum. The library also provides services such as book circulation, book bank facility, access to previous year question papers, periodicals, and a reading room.
+                    Career Services: AITM has a Training & Placement Cell that focuses on creating awareness about career planning and mapping, equipping students with life skills, and providing training on competitive exams, mock interviews, personality development, and group discussion techniques. The cell also conducts online tests and shares the results.
+                    Student Organizations: AITM encourages multi-disciplinary collaboration and offers opportunities for students to engage in various activities and events. While the specific student organizations are not mentioned in the provided context, it can be inferred that AITM fosters a vibrant campus life with cultural activities, sports clubs, and other extracurricular opportunities.`;
+            }
+            else if (userInput.toLowerCase().includes('events') || userInput.toLowerCase().includes('activities')) {
+                return `Vencer 2024-National level Techno-Cultural event`;
+            }
+            else if (userInput.toLowerCase().includes('cultural secretary') || userInput.toLowerCase().includes('secretary')) {
+                return `Prof.Gautam Dematti`;
+            }
+            else if (userInput.toLowerCase().includes('postgraduate courses') || userInput.toLowerCase().includes('MBA') || userInput.toLowerCase().includes('MTech')) {
+                return `The postgraduate courses available at AITM are:
+                Master of Business Administration (MBA)
+                Master of Computer Application (MCA)
+                Master of Technology (MTech.) in Production Engineering & System Technology (Mechanical Engineering)
+                Master of Technology (MTech.) in Waste Management, Health & Safety Engineering (Civil Engineering)`;
+            }
+            else if (userInput.toLowerCase().includes('diploma courses') || userInput.toLowerCase().includes('diploma')) {
+                return `AITM offers diploma courses in Mechanical Engineering, Civil Engineering, Computer Science Engineering, and Electrical Engineering.`;
+            }
+            else if (userInput.toLowerCase().includes('geographical') || userInput.toLowerCase().includes('location')) {
+                return `The geographical location of Suresh Angadi Education Foundation (SAEF) is in Belgaum, Karnataka, India.`;
+            }
+            else if (userInput.toLowerCase().includes('industry collaborations') || userInput.toLowerCase().includes('projects undertaken')) {
+                return `<ul>Here are a few examples:
+                        <li><b>Internships:</b> AITM students have the opportunity to undertake internships with leading companies in their respective fields. These internships provide hands-on experience and allow students to apply their theoretical knowledge in real-world scenarios. For example, students pursuing computer science have interned at tech giants like Google and Microsoft, while engineering students have interned at companies like General Electric and Siemens.</li>
+                       <br> <li><b>Research Projects:</b> AITM students often collaborate with industry partners on research projects. These projects aim to address real-world challenges and develop innovative solutions. For instance, students from the Department of Biotechnology have collaborated with pharmaceutical companies to develop new drugs and therapies. Similarly, students from the Department of Civil Engineering have worked with construction companies to develop sustainable building materials.</li>
+                       <br> <li><b>Hackathons and Competitions:</b> AITM students actively participate in hackathons and competitions organized by industry partners. These events provide a platform for students to showcase their skills and creativity. For example, students from the Department of Information Technology have participated in hackathons organized by companies like IBM and Amazon. They have developed innovative software solutions and won accolades for their work.</li>
+                       <br>     <li><b>Industry Visits and Guest Lectures:</b> AITM regularly organizes industry visits and invites industry experts for guest lectures. These initiatives provide students with insights into the industry and help them understand the practical aspects of their chosen field. For instance, students from the Department of Mechanical Engineering have visited manufacturing plants to observe the production process and interact with industry professionals.</li>
+                       <br>         <li><b>Collaborative Projects:</b> AITM students often collaborate with industry partners on specific projects. These projects can range from designing a new product to improving existing processes. For example, students from the Department of Electrical Engineering have collaborated with power companies to develop smart grid solutions. They have worked on optimizing energy distribution and integrating renewable energy sources.</li></ul>`;
+            }
+            else if (userInput.toLowerCase().includes('partnerships') || userInput.toLowerCase().includes('collaborations') || userInput.toLowerCase().includes('robotics & automation engineering department')) {
+                return `<p>The Department of Robotics and Automation Engineering at Angadi Institute of Technology and Management (AITM) has facilitated an insightful industrial visit to Orion Hydraulics Pvt Ltd. During this visit, students had the opportunity to explore various sections of the industry and interact with industry professionals. This collaboration between AITM and Orion Hydraulics Pvt Ltd showcases a partnership in the field of robotics and automation engineering.</p>`;
+            }
+            else if (userInput.toLowerCase().includes('alumni') || userInput.toLowerCase().includes('foster alumni')) {
+                return `<ul><li>AITM engages with alumni and fosters alumni relations through various activities and initiatives. 
+                    <li><b>Here are some ways in which AITM engages with alumni:</b><li>
+                        <li><b>Alumni Cell:</b> AITM has an Alumni Cell that is actively involved in building a strong bridge between the students and the institute. The cell organizes alumni meets, guest talks, and alumni interactions to facilitate networking and mentorship opportunities<li>
+                            <li><b>Alumni Mentoring Programs:</b> AITM provides alumni mentoring programs for students, focusing on technical help and career counseling.<li>
+                                <li><b>Alumni Fund:</b> AITM has established an alumni fund to assist student ventures and scholarship opportunities.<li>
+                                    <li><b>Batch Reunions and Celebrations:</b> AITM provides a forum for batch reunions and other celebrations, allowing alumni to reconnect and reminisce about their college days.<li>
+                                        <li><b>Alumni Database:</b> AITM has created a comprehensive and secure alumni database to enable personal and professional connections among members.<li></ul>`;
+            }
+            else if (userInput.toLowerCase().includes('training') || userInput.toLowerCase().includes('placement opportunities')) {
+                return `<ul><li><b>Pre-placement Training Program:</b> AITM conducts a pre-placement training program for its students, which helps them enhance their employability skills and develop a broader perspective on their career goals.<li>
+                    <li><b>Training and Placement Activities:</b> AITM organizes training and placement activities as part of its co-curricular offerings. These activities include internships, industrial visits, expert talks, and workshops, which provide students with opportunities to enhance their overall skill sets and become industry-ready.<li>
+                        <li><b>Placement Training and Internship Program:</b> AITM conducts a placement training and internship program to prepare students for the academic year. The program includes briefings and guidance on placement training and internships.<li>
+                            <li><b>Collaboration with Industries:</b> AITM collaborates with industries to enhance students' learning experiences. This collaboration includes joint research projects, sharing resources and expertise, and providing hands-on experience in cutting-edge technologies.<li>
+                                <li><b>Department of Training and Placement:</b> AITM has a dedicated Department of Training and Placement that coordinates and facilitates the training and placement activities for students. The department works closely with industry partners to provide internship and employment opportunities to students.<li>
+                                    <li><b>Guest Speakers and Alumni Engagement:</b> AITM invites alumni and industry professionals as guest speakers to share their expertise and provide insights into real-world experiences. This exposure helps students gain practical knowledge and industry perspectives.<li>
+                                        <li><b>Recognition of Alumni Achievements:</b> AITM regularly highlights the success stories of its alumni through newsletters, social media, and other communication channels. This recognition not only celebrates the accomplishments of alumni but also inspires current students and showcases the value of an AITM education.<li>
+                                            <li><b>Feedback and Continuous Improvement: </b>AITM actively seeks feedback from its alumni to improve the curriculum, facilities, and overall student experience. This feedback is used to make necessary improvements and ensure that AITM remains relevant and responsive to the needs of its graduates.<li></ul>`;
+            }
+            else if (userInput.toLowerCase().includes('course introduced')) {
+                return `The new course introduced at AITM is Robotics and Automation Engineering. This course is designed to provide students with a comprehensive understanding of robotics and automation technologies. It aims to equip students with the necessary skills and knowledge to design, develop, and implement robotic systems and automated processes.`;
+            }
+            else if (userInput.toLowerCase().includes('techno-cultural fests')) {
+                return `At both the institution and department levels, various types of techno-cultural fests are organized to promote a blend of technology and culture among students. These fests serve as platforms for students to showcase their talents, learn new skills, and foster a sense of community within the institution.`;
+            }
+            
+            // If the question doesn't match any predefined categories, redirect user to search online
+            redirectToSearchOnline(userInput);
+            return 'Searching online for your query...';
+        
+        }
+        function redirectToSearchOnline(query) {
+            // Construct the search URL with the query term
+            const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            // https://aitmbgm.ac.in/
+            // Redirect the user to the search URL
+            window.location.href = searchUrl;
+        }
+
+        function readMessageAloud(message) {
+            var speech = new SpeechSynthesisUtterance(message);
+            window.speechSynthesis.speak(speech);
+        }
+
+        function readLastMessageAloud() {
+            var chatBox = document.querySelector('.chat-box');
+            var lastMessage = chatBox.lastChild.textContent;
+            readMessageAloud(lastMessage);
+        }
+    </script>
+
+</body>
+
+</html>
